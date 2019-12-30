@@ -1,2 +1,2 @@
 # sudokuSolver
-A program that solves soduku puzzles using backtracking
+A program that solves sudoku puzzles using backtracking
