@@ -8,6 +8,7 @@ b = [[1,0,1,0,0,0,0,6,5],
      [0,0,0,3,0,0,5,7,0],
      [5,2,3,1,0,0,4,0,0]]
 
+# Solved board for testing purposes
 a = [[4,8,1,2,7,3,9,6,5],
      [7,5,2,6,1,9,3,8,4],
      [3,6,9,5,4,8,2,1,7],
@@ -85,10 +86,10 @@ def solve(board):
     
     return False
 
-printBoard(b)
-print("# # # # # # # # # # #")
+#printBoard(b)
+#print("# # # # # # # # # # #")
 
-if not solve(b):
-    print("Invalid Board")
-else:
-    printBoard(b)
+#if not solve(b):
+    #print("Invalid Board")
+#else:
+    #printBoard(b)
