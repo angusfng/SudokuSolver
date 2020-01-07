@@ -1,13 +1,3 @@
-b = [[1,0,1,0,0,0,0,6,5],
-     [0,0,0,6,0,9,0,8,0],
-     [3,0,0,0,4,8,0,0,0],
-     [0,0,0,0,2,0,0,5,8],
-     [0,0,6,0,0,0,1,2,0],
-     [0,0,0,0,9,0,0,0,0],
-     [0,4,0,0,0,0,0,0,0],
-     [0,0,0,3,0,0,5,7,0],
-     [5,2,3,1,0,0,4,0,0]]
-
 # Solved board for testing purposes
 a = [[4,8,1,2,7,3,9,6,5],
      [7,5,2,6,1,9,3,8,4],
@@ -65,11 +55,14 @@ def validNumber(board, num, position):
 
     return True
 
+def checkValidBoard(board):
+    for i in range(len(board)):
+
 def solve(board):
     square = getEmptySquare(board)
     # Base Case
     if square is None:
-        return True
+        return board
     else:
         row, column = square
 
@@ -79,7 +72,7 @@ def solve(board):
             board[row][column] = i
             # If i of that branch solved it
             if solve(board):
-                return True
+                return board
             # Will not get to here if branch is correct
             # If the board is not solved on that branch, sets back to 0 and tries next i
             board[row][column] = 0
