@@ -55,8 +55,13 @@ def validNumber(board, num, position):
 
     return True
 
+# Checks if the board is a solveable sudoku board
 def checkValidBoard(board):
     for i in range(len(board)):
+        for j in range(len(board)):
+            if not validNumber(board, board[i][j], (i, j)) and board[i][j] != 0:
+                return False
+    return True
 
 def solve(board):
     square = getEmptySquare(board)
@@ -79,8 +84,9 @@ def solve(board):
     
     return False
 
-#printBoard(b)
+#printBoard(a)
 #print("# # # # # # # # # # #")
+#print(checkValidBoard(b))
 
 #if not solve(b):
     #print("Invalid Board")

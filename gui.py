@@ -1,5 +1,5 @@
 import pygame, sys
-from sudoku import solve, validNumber, printBoard
+from sudoku import solve, validNumber, printBoard, checkValidBoard
 
 # initializes fonts
 pygame.font.init()
@@ -20,15 +20,19 @@ class Square:
 	def setValue(self, value):
 		self._value = value
 
+	# Gets the row it is in
 	def getRow(self):
 		return self._row
 
+	# Gets the col it is in
 	def getCol(self):
 		return self._col
 
+	# Gets the width of the square
 	def getWidth(self):
 		return self._width
 
+	# Gets the height of the square
 	def getHeight(self):
 		return self._height
 
@@ -70,41 +74,52 @@ class Grid:
 	def __init__(self, rows, cols, width, height):
 		self._rows = rows
 		self._cols = cols
+		# Initializes 2D array of squares
 		self._squares = [[Square(self.b[i][j], i, j, width, height) for j in range(cols)] for i in range(rows)]
 		self._width = width
 		self._height = height
 		self._selected = None
 		self._board = self.b
 
+	# Gets the number of rows in the grid
 	def getRows(self):
 		return self._rows
 
+	# Gets the number of cols in the grid
 	def getCols(self):
 		return self._cols
 	
+	# Gets 2D array of squares
 	def getSquares(self):
 		return self._squares
 
+	# Gets width of the grid
 	def getWidth(self):
 		return self._width
 
+	# Gets height of the grid
 	def getHeight(self):
 		return self._height
 
+	# Gets the currently selected coordinate of the grid
 	def getSelected(self):
 		return self._selected
 
+	# Sets the currently selected coordinate of the grid
 	def setSelected(self, row, col):
 		self._selected = (row, col)
 
+	# Gets the sudoku board
 	def getBoard(self):
 		return self._board
 
+	# Sets a value in the sudoku board
 	def setBoard(self, row, col, value):
 		self._board[row][col] = value
 
+	# Draws the grid into the window
 	def draw(self, win):
-		# Draw Grid Lines
+		# Draw grid lines
 		gap = self.getWidth() / 9
 		for i in range(self.getRows() + 1):
 			if i % 3 == 0 and i != 0:
@@ -145,8 +160,10 @@ class Grid:
 
 	# Solves the entire board
 	def solve(self):
+		if not checkValidBoard(self.getBoard()):
+			print("Please put a valid board")
+			return
 		solved = solve(self.getBoard())
-		print(solved)
 		if solved:
 			for i in range(self.getRows()):
 				for j in range(self.getCols()):
@@ -159,7 +176,6 @@ class Grid:
 	def clearBoard(self):
 		for i in range(self.getRows()):
 			for j in range(self.getCols()):
-				#print("set {} {} to 0".format(i, j))
 				self.getSquares()[i][j].setValue(0)
 				self.getBoard()[i][j] = 0
 
@@ -210,7 +226,6 @@ def main():
 						board.clearSquare()
 					key = None
 				if event.key == pygame.K_RETURN:
-					
 					board.solve()
 					key = None
 				if event.key == pygame.K_c:
