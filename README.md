@@ -1,4 +1,4 @@
-# sudokuSolver
+# sudoku-solver
 A program that solves sudoku puzzles using backtracking.
 
 Requires pygame.
